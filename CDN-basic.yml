@@ -1,0 +1,30 @@
+
+# demo_setup.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+ 
+    - name: get data 
+      ec2_instance_facts:
+        region: us-east-1
+        filters:
+          instance-state-name:  running
+      register: ec2
+
+    - debug:  var=ec2.instances[0].public_dns_name
+
+      
+
+
+    - name: Set CDN
+      cloudfront_distribution:
+        state: present
+        default_origin_domain_name: "{{ec2.instances[0].public_dns_name}}"
+        tags:
+           Name: example distribution
+           Project: example project
+           Priority: '1'
+

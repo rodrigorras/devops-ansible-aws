@@ -1,0 +1,26 @@
+# demo_setup.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  
+  tasks:
+  - name: Provision RDS Instance
+    rds:
+       command: create
+       instance_name: RodrigoRios
+       db_engine: MySQL
+       size: 10
+       instance_type: db.t2.micro
+       wait: yes
+       wait_timeout: 600 
+       username: admin
+       password: 1nsecure
+       tags:
+         Environment: testing
+         Application: cms
+      
+       
+
+  - name: Creating Databases
+    command: "bash atualiza_rds_endpoint_feed_mysql.sh"

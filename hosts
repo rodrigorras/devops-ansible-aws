@@ -1,0 +1,7 @@
+
+[local]
+localhost
+
+[ec2hosts]
+ec2-34-229-156-199.compute-1.amazonaws.com
+ec2-54-91-211-211.compute-1.amazonaws.com 

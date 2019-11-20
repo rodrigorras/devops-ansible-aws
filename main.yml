@@ -1,0 +1,6 @@
+---
+- import_playbook: create-sec-group.yml 
+- import_playbook: Deploy-EC-Instance.yml
+- import_playbook: rds_provision.yml 
+- import_playbook: CDN-basic.yml
+

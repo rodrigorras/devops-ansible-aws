@@ -1,0 +1,64 @@
+
+# demo_setup.yml
+- name: (Rodrigo-Rios Playbook)(Step 1) Provision a VM to AWS Cloud
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  remote_user: ec2-user
+  become_method: sudo
+  tasks:
+
+    - name: (Rodrigo-Rios Playbook)(step 1) Provision - passing Details)
+      ec2:
+         key_name: key
+         group: default
+         instance_type: t2.micro
+         region: us-east-1
+         image: ami-0080e4c5bc078760e 
+         wait: true
+         exact_count: 2
+         count_tag:
+            Name: Demo
+         instance_tags:
+            Name: Demo
+      register: ec2
+    - name: Print EC2 Values
+      debug: var=ec2
+
+    - name: Add all instance public IPs to host group
+      add_host: hostname={{ item.public_ip }} groups=ec2hosts
+      with_items: "{{ ec2.instances }}"
+      #ansible_user: ec2-user
+      #ansible_ssh_private_key_file: ~/.ssh/id_rsa
+    
+  #  - name: Yum Install  
+  #    become: yes 
+  #    yum:
+  #      pkg: php=php state=installed
+
+
+   
+- name: configuration play
+  hosts: all
+  remote_user: ec2-user
+  gather_facts: true
+  become: yes
+  tasks:
+    - yum: name="Install httpd" pkg=httpd state=installed
+    - yum: pkg=wget state=installed
+    - yum: name="Install PHP" pkg=php state=installed
+    - yum: name="install PHP MY SQL" pkg=php-mysql state=installed
+    - service: name=httpd state=started enabled=yes
+    - file: path=/var/www/html/RodrigoRios state=directory
+    - command: "wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1m1kUwFthgKLP4s7KjFIW61X1v4PXjr94' -O ./googledrive.tar.gz"
+    - command:  "tar -xzvf googledrive.tar.gz -C /var/www/html/RodrigoRios"
+    - command: "tar -xzvf site-content.tar.gz -C /var/www/html/RodrigoRios"
+  # - shell: sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+   # - shell: rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+   # - yum: pkg=jenkins state=installed
+   # - shell : "service jenkins restart"
+
+      #service: name=httpd state=started enabled=yes
+
+
+
