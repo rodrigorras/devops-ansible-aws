@@ -5,7 +5,7 @@ Hello Gentleman,
 Chris and Jorge, Thanks for the Patiente, 
 
 *My script also works for multiple Instances of Web Servers pointing to the same database
-*I lost some precious hours yesterday troubleshooting the Add_host feature, which seems to be broken. I finally decided to go with Dynamic Hosts (which is awesome!)
+*I finally decided to go with Dynamic Hosts (which is awesome!)
 
 
 This provisioning is a provision of  AWS + ANSIBLE, VANHACKs Challenge:
