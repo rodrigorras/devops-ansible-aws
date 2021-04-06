@@ -2,8 +2,6 @@
 
 Hello Gentleman,
 
-Chris and Jorge, Thanks for the Patiente, 
-
 *My script also works for multiple Instances of Web Servers pointing to the same database
 *I finally decided to go with Dynamic Hosts (which is awesome!)
 
