@@ -6,8 +6,8 @@ Hello Gentleman,
 *I finally decided to go with Dynamic Hosts (which is awesome!)
 
 
-This provisioning is a provision of  AWS + ANSIBLE, VANHACKs Challenge:
-=======================================================================
+This provisioning is a provision of  AWS + ANSIBLE
+==================================================
 
 - This solution need the Dynamic Host Resolution from this link: https://aws.amazon.com/blogs/apn/getting-started-with-ansible-and-dynamic-amazon-ec2-inventory-management/
 
